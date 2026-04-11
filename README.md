@@ -98,6 +98,9 @@ chmod -x [start-jellyfin-tmux.sh](start-jellyfin-tmux.sh)
 ```
 
 Run this script [start-jellyfin-tmux.sh](start-jellyfin-tmux.sh)
+```
+./start-jellyfin-tmux.sh 
+```
 
 
 OR
@@ -156,6 +159,13 @@ Open your browser on the phone:
 http://127.0.0.1:8096
 ```
 
+OR
+Your device IPv4
+```
+http://192.168.XXX.XXX:8096
+```
+
+
 If the web interface loads, Jellyfin is running correctly.
 
 ---
@@ -183,6 +193,23 @@ Check if Jellyfin is listening:
 ss -tuln | grep 8096
 ```
 
+### To check if jellyfin is running or not
+
+```bash
+ps aux | grep jellyfin
+```
+
+### To kill a session from tmux
+
+```bash
+tmux kill-session -t jellyfin
+```
+
+### To Kill jellyfin session from outside of tmux
+```bash
+pkill -f jellyfin
+```
+
 ---
 
 ##  Notes
@@ -190,11 +217,9 @@ ss -tuln | grep 8096
 * Keep the terminal session open while Jellyfin runs
 * For LAN access, change bind address later if needed
 * If you don't want to run usin tmux then use [start-jellyfin.sh](start-jellyfin.sh)
+* To detach from tmux session **Ctrl + B, then D**
+* To kill a session ```tmux kill-session -t jellyfin```
 
 ---
-
-## 🎉 Result
-
-You now have a working **Jellyfin media server running entirely on an Android device** using Termux and proot.
 
 Happy self‑hosting!
