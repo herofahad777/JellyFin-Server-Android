@@ -89,9 +89,11 @@ mkdir -p /root/jellyfin-data /root/jellyfin-cache /root/jellyfin-log
 
 ---
 
-##  5. Running Jellyfin (Working Command with environment variables Set)
+##  5. Running Jellyfin with tmux (Working Command with environment variables Set)
 
-Run this script [start-jellyfin.sh](start-jellyfin.sh)
+screen failed to work with [start-jellyfin.sh](start-jellyfin.sh)
+
+Run this script [start-jellyfin-tmux.sh](start-jellyfin-tmux.sh)
 
 OR
 
@@ -182,6 +184,7 @@ ss -tuln | grep 8096
 
 * Keep the terminal session open while Jellyfin runs
 * For LAN access, change bind address later if needed
+* If you don't want to run usin tmux then use [start-jellyfin.sh](start-jellyfin.sh)
 
 ---
 
