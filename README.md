@@ -1,4 +1,173 @@
-# JellyFin-Server-Android
-Jellyfin Server on Android (Termux + Proot)
+# Jellyfin Server on Android (Termux + proot)
 
-A guide to run a full Jellyfin media server directly on an Android device using Termux and proot-based Linux.
+This guide explains how to run a **Jellyfin media server on an Android phone** using **Termux + proot Linux**.
+
+---
+
+## 📌 Requirements
+
+* Android phone (Minimum - 4 GB Ram)
+* Termux (recommended from F‑Droid)
+* At least 3–4 GB free storage
+* Termux Must have full file access
+  
+---
+
+##  1. Setup (Termux)
+
+### 1.1 Update Termux
+
+```bash
+pkg update && pkg upgrade -y
+```
+
+### 1.2 Install proot and OpenSSH
+
+```bash
+pkg install proot-distro openssh -y
+```
+
+### 1.3 Give Storage Permission
+
+```bash
+termux-setup-storage
+```
+
+Allow the permission prompt.
+
+### 1.4 Enable Termux Wake Lock
+
+```bash
+termux-wake-lock
+```
+
+Prevents the session from stopping.
+
+---
+
+##  2. Install Linux (Debian)
+
+> Ubuntu is not used here because of LTS Issues. As proot-distro only installs the latest version of ubuntu and that causes installation issue with jellyfin.
+
+### Install Debian (recommended)
+
+```bash
+proot-distro install debian
+proot-distro login debian
+```
+w
+### Inside Linux environment
+
+```bash
+apt update && apt upgrade -y
+apt install curl wget sudo nano -y
+```
+
+---
+
+##  3. Install Jellyfin
+
+Inside your Linux environment:
+
+```bash
+apt install jellyfin -y
+```
+
+Jellyfin will be installed but **do not start it yet**.
+
+---
+
+##  4. Important Fixes (Required for Android/Termux)
+
+Jellyfin needs special environment settings to run in proot.
+
+Create data folders:
+
+```bash
+mkdir -p /root/jellyfin-data /root/jellyfin-cache /root/jellyfin-log
+```
+
+Set required environment variables:
+
+```bash
+export DOTNET_GCHeapHardLimit=268435456
+export DOTNET_GCHeapHardLimitPercent=0
+export COMPlus_GCHeapHardLimit=268435456
+export COMPlus_GCHeapCount=1
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+export DOTNET_SYSTEM_NET_DISABLEIPV6=1
+export ASPNETCORE_URLS=http://127.0.0.1:8096
+```
+
+---
+
+##  5. Running Jellyfin (Working Command)
+
+Use this exact command:
+
+```bash
+jellyfin \
+  --datadir /root/jellyfin-data \
+  --cachedir /root/jellyfin-cache \
+  --logdir /root/jellyfin-log \
+  --webdir /usr/share/jellyfin/web \
+  --nonetchange \
+  --ffmpeg /usr/share/jellyfin-ffmpeg/ffmpeg
+```
+
+### Why this works
+
+* `--nonetchange` avoids a crash caused by blocked network monitoring in proot
+* Environment variables limit .NET memory usage
+  
+---
+
+##  6. Access Jellyfin
+
+Open your browser on the phone:
+
+```
+http://127.0.0.1:8096
+```
+
+If the web interface loads, Jellyfin is running correctly.
+
+---
+
+
+##  Troubleshooting
+
+### ❌ `GC heap initialization failed`
+
+Increase or adjust memory limits using the environment variables above.
+
+### ❌ `NetworkChange.CreateSocket Permission denied`
+
+Always run Jellyfin with:
+
+```
+--nonetchange
+```
+
+### ❌ Cannot open web UI
+
+Check if Jellyfin is listening:
+
+```bash
+ss -tuln | grep 8096
+```
+
+---
+
+##  Notes
+
+* Keep the terminal session open while Jellyfin runs
+* For LAN access, change bind address later if needed
+
+---
+
+## 🎉 Result
+
+You now have a working **Jellyfin media server running entirely on an Android device** using Termux and proot.
+
+Happy self‑hosting!
