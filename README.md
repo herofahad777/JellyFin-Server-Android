@@ -1,2 +1,4 @@
-# JellyFin-Android
-How to setup JellyFin on Android using Termux
+# JellyFin-Server-Android
+Jellyfin Server on Android (Termux + Proot)
+
+A guide to run a full Jellyfin media server directly on an Android device using Termux and proot-based Linux.
