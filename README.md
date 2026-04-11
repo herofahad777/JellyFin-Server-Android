@@ -229,6 +229,12 @@ tmux ls
 tmux attach -t jellyfin
 ```
 
+### To access Phone Storage
+```bash
+cd /storage/emulated/0
+ls
+```
+
 ---
 
 ##  Notes
