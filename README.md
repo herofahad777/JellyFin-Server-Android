@@ -219,6 +219,16 @@ tmux kill-session -t jellyfin
 pkill -f jellyfin
 ```
 
+### To see tmux sessions list
+```bash
+tmux ls
+```
+
+### Connect to tmux session
+```bash
+tmux attach -t jellyfin
+```
+
 ---
 
 ##  Notes
@@ -227,7 +237,6 @@ pkill -f jellyfin
 * For LAN access, change bind address later if needed
 * If you don't want to run usin tmux then use [start-jellyfin.sh](start-jellyfin.sh)
 * To detach from tmux session **Ctrl + B, then D**
-* To kill a session ```tmux kill-session -t jellyfin```
 
 ---
 
