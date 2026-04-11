@@ -91,7 +91,7 @@ mkdir -p /root/jellyfin-data /root/jellyfin-cache /root/jellyfin-log
 
 ##  5. Running Jellyfin (Working Command with environment variables Set)
 
-Run this script [Open Report](start-jellyfin.sh)
+Run this script [start-jellyfin.sh](start-jellyfin.sh)
 
 OR
 
