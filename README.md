@@ -93,7 +93,12 @@ mkdir -p /root/jellyfin-data /root/jellyfin-cache /root/jellyfin-log
 
 screen failed to work with [start-jellyfin.sh](start-jellyfin.sh)
 
+``` 
+chmod -x [start-jellyfin-tmux.sh](start-jellyfin-tmux.sh)
+```
+
 Run this script [start-jellyfin-tmux.sh](start-jellyfin-tmux.sh)
+
 
 OR
 
