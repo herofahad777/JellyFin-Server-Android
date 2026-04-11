@@ -2,6 +2,15 @@
 
 This guide explains how to run a **Jellyfin media server on an Android phone** using **Termux + proot Linux**.
 
+## Tested
+* Android 14
+* 8GB RAM
+* Dimensity 6080
+
+## Result
+* Worked Smoothly
+* Startup time 3 Minites
+
 ---
 
 ## 📌 Requirements
