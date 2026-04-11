@@ -60,7 +60,7 @@ w
 
 ```bash
 apt update && apt upgrade -y
-apt install curl wget sudo nano -y
+apt install curl wget sudo nano tmux -y
 ```
 
 ---
@@ -87,38 +87,57 @@ Create data folders:
 mkdir -p /root/jellyfin-data /root/jellyfin-cache /root/jellyfin-log
 ```
 
-Set required environment variables:
+---
+
+##  5. Running Jellyfin (Working Command with environment variables Set)
+
+Run this script [Open Report](start-jellyfin.sh)
+
+OR
+
+Use this exact command:
 
 ```bash
+SESSION="jellyfin"
+
+# If tmux session exists, attach instead of starting another
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+    echo "Jellyfin is already running in tmux session: $SESSION"
+    echo "Attaching..."
+    tmux attach -t "$SESSION"
+    exit 0
+fi
+
+echo "Starting Jellyfin in tmux session: $SESSION"
+
+tmux new -d -s "$SESSION" "
 export DOTNET_GCHeapHardLimit=268435456
 export DOTNET_GCHeapHardLimitPercent=0
 export COMPlus_GCHeapHardLimit=268435456
 export COMPlus_GCHeapCount=1
 export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+export ASPNETCORE_URLS=http://0.0.0.0:8096
 export DOTNET_SYSTEM_NET_DISABLEIPV6=1
-export ASPNETCORE_URLS=http://127.0.0.1:8096
-```
 
----
-
-##  5. Running Jellyfin (Working Command)
-
-Use this exact command:
-
-```bash
-jellyfin \
+exec jellyfin \
   --datadir /root/jellyfin-data \
   --cachedir /root/jellyfin-cache \
   --logdir /root/jellyfin-log \
   --webdir /usr/share/jellyfin/web \
   --nonetchange \
   --ffmpeg /usr/share/jellyfin-ffmpeg/ffmpeg
+"
+
+echo "Jellyfin started."
+echo "Attach with: tmux attach -t $SESSION"
 ```
 
 ### Why this works
 
 * `--nonetchange` avoids a crash caused by blocked network monitoring in proot
 * Environment variables limit .NET memory usage
+
+The Environment Variables need to be set everytime you run the command.
   
 ---
 
