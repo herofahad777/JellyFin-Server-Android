@@ -6,9 +6,11 @@ This guide explains how to run a **Jellyfin media server on an Android phone** u
 * Android 14
 * 8GB RAM
 * Dimensity 6080
+* JellyFin Version 10.11.8+deb13
 
 ## Result
 * Worked Smoothly
+* Problems in playback when video is forwarded or backwarded if less than 50sec on 4k or 200Mbits
 * Startup time 3 Minites
 
 ---
