@@ -4,15 +4,19 @@ This guide explains how to run a **Jellyfin media server on an Android phone** u
 
 ## Tested
 * Android 14
+* Debian 12,13
 * 8GB RAM
 * Dimensity 6080
 * JellyFin Version 10.11.8+deb13
+* JellyFin Version 10.11.10+deb13
 
 ## Result
 * Worked Smoothly
 * Problems in playback when video is forwarded or backwarded if less than 50sec on 4k or 200Mbits
 * Startup time 3 Minites
 
+## Failed
+* Ubuntu
 ---
 
 ## 📌 Requirements
@@ -81,10 +85,10 @@ apt install curl wget sudo nano tmux -y
 Inside your Linux environment:
 
 ```bash
-apt install jellyfin -y
+curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
 ```
 
-Jellyfin will be installed but **do not start it yet**.
+Jellyfin will be installed and will autostart so close it.
 
 ---
 
